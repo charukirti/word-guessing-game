@@ -1,6 +1,6 @@
 @media only screen and (max-width: 768px) {
   main {
-    width: 25rem;
+    width: 90%;
     padding: 2rem;
     margin: 2rem;
   }
@@ -49,4 +49,10 @@
   }
 }
 
-
+@media only screen and (max-width: 425px) {
+  main {
+    width: 25rem;
+    padding: 1.25rem;
+    margin: 10rem;
+  }
+}
