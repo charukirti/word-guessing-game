@@ -91,7 +91,7 @@ function statGame() {
 function checkGuess() {
     const userGuess = Array.from(inputFields).map(input => input.value).join('')
 
-    if (userGuess === currentWord) {
+    if (userGuess.toLowerCase() === currentWord.toLowerCase()) {
         resultElement.textContent = 'Correct guess, you won 🎉'
         resultElement.style.color = '#2ecc71';
 
@@ -100,7 +100,7 @@ function checkGuess() {
     } else if (userGuess === '') {
         resultElement.textContent = 'Input should not be empty'
         resultElement.style.color = '#e74c3c';
-    } else if (userGuess !== currentWord) {
+    } else if (userGuess.toLowerCase() !== currentWord.toLowerCase()) {
         resultElement.textContent = 'Incorrect letter, Try again 💪';
         resultElement.style.color = '#e67e22';
 
