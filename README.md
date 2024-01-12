@@ -23,3 +23,4 @@ You can contribute to this repository by:
 ---
 
 # Preview link 🌐
+[Let's play](https://wrod-scrambling.netlify.app/)
