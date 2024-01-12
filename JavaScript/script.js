@@ -94,7 +94,7 @@ function checkGuess() {
     if (userGuess.toLowerCase() === currentWord.toLowerCase()) {
         resultElement.textContent = 'Correct guess, you won 🎉'
         resultElement.style.color = '#2ecc71';
-
+        
         inputFields.forEach(input => input.disabled = true)
         inputFields.forEach(input => input.style.borderColor = 'green')
     } else if (userGuess === '') {
@@ -115,13 +115,13 @@ function checkGuess() {
 }
 
 // funtion to show hint
-function displayHint(hint) {
+function displayHint() {
     hintElement.textContent = currentHint
 }
 
 // function to handle mistakes
 function handleMistake(userGuess) {
-    const incorrectLetters = userGuess.split('').filter(letter => !currentWord.includes(letter))
+    const incorrectLetters = userGuess.toLowerCase().split('').filter(letter => !currentWord.includes(letter))
 
     // Adding incorrect letters to mistakeWords array
 
@@ -132,7 +132,7 @@ function handleMistake(userGuess) {
     })
 
     const misplacedLetters = [];
-    userGuess.split('').forEach((letter, index) => {
+    userGuess.toLowerCase().split('').forEach((letter, index) => {
         if (currentWord.includes(letter) && letter !== currentWord[index]) {
             misplacedLetters.push(letter);
         }
