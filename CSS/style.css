@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.flex {
+  display: flex;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  background: linear-gradient(to right, #c951e7 0%, #7429c6 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #fff;
+}
+
+main {
+  background-color: #030616;
+  width: 30rem;
+  padding: 3rem;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.header {
+  margin-bottom: 1rem;
+}
+
+header > img {
+  width: 100%;
+}
+
+.scramble_words {
+  padding: 1rem;
+  width: 30rem;
+  max-width: 100%;
+  background-color: #4a5567;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 3px 0px 1px #010207;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #97a3b6;
+  letter-spacing: 0.5ch;
+}
+
+.extras {
+  align-items: center;
+  gap: 5rem;
+  margin-bottom: 1rem;
+}
+
+.tries {
+  gap: 0.2rem;
+  align-items: center;
+}
+
+.dot-container {
+  align-items: center;
+}
+
+.dot-container .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.3rem;
+}
+
+.tries small,
+.mistake small {
+  color: #4a5567;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.mistake_letters {
+  font-size: 1rem;
+}
+
+.input_container .letter-input {
+  width: 3.5rem;
+  padding: 15px;
+  margin: 0.3rem;
+  background-color: #030616;
+  border-radius: 10px;
+  border: 2px solid #97a3b6;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #f2f5f9;
+  outline: none;
+  margin-bottom: 1rem;
+}
+
+.input_container input:focus {
+  border: 2px solid #7429c6;
+}
+
+.result {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-top: 0.5rem;
+}
+
+.hint {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  color: #c951e7;
+}
+
+.btn_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2rem;
+}
+
+.btn_container .btn {
+  margin-top: 1rem;
+  padding: 15px 40px;
+  background-color: #c951e7;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  color: #f2f5f9;
+  font-weight: 700;
+  box-shadow: 0px 3px 0px 1px #7429c6;
+  cursor: pointer;
+  transition: 0.45s box-shadow ease-in-out;
+}

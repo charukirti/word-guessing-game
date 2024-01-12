@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/responsive.css">
+    <title>Word guessing game</title>
+</head>
+
+<body>
+    <main class="flex">
+        <div class="header">
+            <img src="./img/Word Scramblle.svg" alt="">
+        </div>
+
+        <div class="scramble_words" id="scramble">
+
+        </div>
+
+        <p class="hint"></p>
+
+        <div class="extras flex">
+            <div class="tries flex">
+                <small>Tries(<span id="remaining">5</span>/5):</small>
+                <div class="dot-container flex">
+                    <div class="dot" id="dot"></div>
+                    <div class="dot" id="dot"></div>
+                    <div class="dot" id="dot"></div>
+                    <div class="dot" id="dot"></div>
+                    <div class="dot" id="dot"></div>
+                </div>
+            </div>
+
+            <div class="mistake">
+                <small>Mistakes: <span id="mistakes" class="mistake_letters" </span></small>
+            </div>
+        </div>
+
+        <div class="input_container flex">
+            <input type="text" class="letter-input" maxlength="1">
+            <input type="text" class="letter-input" maxlength="1">
+            <input type="text" class="letter-input" maxlength="1">
+            <input type="text" class="letter-input" maxlength="1">
+            <input type="text" class="letter-input" maxlength="1">
+            <input type="text" class="letter-input" maxlength="1">
+        </div>
+
+
+        <p class="result" id="result"></p>
+
+        <div class="btn_container">
+            <button class="btn" id="check_btn">Check</button>
+            <button class="btn" id="hint_btn">Hint</button>
+            <button class="btn" id="reset_btn">Reset</button>
+        </div>
+    </main>
+    <script src="JavaScript/script.js"></script>
+
+</body>
+
+</html>

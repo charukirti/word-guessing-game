@@ -1,0 +1,50 @@
+@media only screen and (max-width: 768px) {
+  main {
+    width: 25rem;
+    padding: 2rem;
+    margin: 2rem;
+  }
+
+  .scramble_words {
+    width: 95%;
+    font-size: 1.5rem;
+  }
+
+  .extras {
+    gap: 2rem;
+  }
+
+  .tries {
+    gap: 0.1rem;
+  }
+
+  .tries small,
+  .mistake small {
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .mistake_letters {
+    font-size: 0.8rem;
+  }
+
+  .input_container .letter-input {
+    width: 2.5rem;
+    padding: 10px;
+    font-size: 1rem;
+    margin: 0.2rem;
+  }
+
+  .btn_container .btn {
+    padding: 12px 25px;
+    font-size: 0.8rem;
+  }
+
+  .letter-input {
+    text-align: center;
+  }
+
+  .letter-input:focus {
+    ime-mode: disabled;
+  }
+}
