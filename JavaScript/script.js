@@ -4,7 +4,7 @@
 //Game elements
 const scrambledWordElement = document.querySelector('#scramble');
 const hintElement = document.querySelector('.hint')
-const inputFields = document.querySelectorAll('.letter-input');
+const inputContainer = document.querySelector('.input_container');
 const remainingChancesElement = document.querySelector('#remaining');
 const chanceIndicators = document.querySelectorAll('#dot');
 const mistakesElement = document.querySelector('#mistakes');
@@ -66,14 +66,19 @@ const words = [
 let chances = 5;
 let remainingChance = chances;
 let mistakeWords = [];
+let inputFields = []
 let currentWord = '';
 let currentHint = '';
+let misplacedLetters = [];
+
 // function to start game 
 function statGame() {
     // Get a random word & hint from the array
     const randomIndex = Math.floor(Math.random() * words.length);
     currentWord = words[randomIndex].word;
     currentHint = words[randomIndex].hint;
+
+    createInputBox(currentWord.length)
 
     // Scramble the random word
     const scrambledWord = shuffleWord(currentWord);
@@ -92,27 +97,38 @@ function checkGuess() {
     const userGuess = Array.from(inputFields).map(input => input.value).join('')
 
     if (userGuess.toLowerCase() === currentWord.toLowerCase()) {
-        resultElement.textContent = 'Correct guess, you won 🎉'
-        resultElement.style.color = '#2ecc71';
-        
-        inputFields.forEach(input => input.disabled = true)
-        inputFields.forEach(input => input.style.borderColor = 'green')
+        handleCorrectGuess()
     } else if (userGuess === '') {
-        resultElement.textContent = 'Input should not be empty'
-        resultElement.style.color = '#e74c3c';
+        handleEmptyGuess
+
     } else if (userGuess.toLowerCase() !== currentWord.toLowerCase()) {
-        resultElement.textContent = 'Incorrect letter, Try again 💪';
-        resultElement.style.color = '#e67e22';
-
-        remainingChance--
-        remainingChance = Math.max(remainingChance, 0);
-
-        chanceIndicators[remainingChance].style.backgroundColor = '#4a5567'
-        remainingChancesElement.textContent = remainingChance
-
-        handleMistake(userGuess)
+        handleIncorrectGuess(userGuess)
     }
 }
+
+
+function handleCorrectGuess() {
+    resultElement.textContent = 'Correct guess, you won 🎉'
+    resultElement.style.color = '#2ecc71';
+    inputFields.forEach(input => input.disabled = true)
+    inputFields.forEach(input => input.style.borderColor = 'green')
+}
+
+function handleEmptyGuess() {
+    resultElement.textContent = 'Input should not be empty'
+    resultElement.style.color = '#e74c3c';
+}
+
+function handleIncorrectGuess(userGuess) {
+    resultElement.textContent = 'Incorrect letter, Try again 💪';
+    resultElement.style.color = '#e67e22';
+    remainingChance--;
+    remainingChance = Math.max(remainingChance, 0);
+    chanceIndicators[remainingChance].style.backgroundColor = '#4a5567';
+    remainingChancesElement.textContent = remainingChance;
+    handleMistake(userGuess)
+}
+
 
 // funtion to show hint
 function displayHint() {
@@ -131,7 +147,7 @@ function handleMistake(userGuess) {
         }
     })
 
-    const misplacedLetters = [];
+
     userGuess.toLowerCase().split('').forEach((letter, index) => {
         if (currentWord.includes(letter) && letter !== currentWord[index]) {
             misplacedLetters.push(letter);
@@ -165,6 +181,30 @@ function shuffleWord(word) {
 }
 
 
+// Function to create input boxes 
+function createInputBox(wordLength) {
+
+    // Clear any existing input fields
+    inputContainer.innerHTML = '';
+    inputFields = [];
+
+    for (let i = 0; i < wordLength; i++) {
+        const inputElement = document.createElement('input')
+        inputElement.type = 'text'
+        inputElement.classList.add('letter-input')
+        inputElement.maxLength = 1
+
+        inputContainer.appendChild(inputElement)
+        inputFields.push(inputElement);
+    }
+
+    inputFields[0].focus();
+
+    handleInputFocus(inputFields)
+
+}
+
+
 // function to update the UI
 
 function updateUI() {
@@ -185,34 +225,37 @@ function updateUI() {
     inputFields.forEach(input => input.style.borderColor = '')
 }
 
+
 // handling focus of the input
-inputFields.forEach((input, index) => {
-    input.addEventListener('input', () => {
-        if (input.value.length === 1) {
-            const nextInput = inputFields[index + 1];
-            if (nextInput) {
-                nextInput.focus();
+function handleInputFocus(inputFields) {
+    inputFields.forEach((input, index) => {
+        input.addEventListener('input', () => {
+            if (input.value.length === 1) {
+                const nextInput = inputFields[index + 1];
+                if (nextInput) {
+                    nextInput.focus();
+                }
             }
-        }
+        });
+
+        input.addEventListener('keydown', (event) => {
+            if (event.key === 'Backspace' && input.value === '') {
+                const previousInput = inputFields[index - 1];
+                if (previousInput) {
+                    previousInput.focus();
+                }
+            }
+
+            if (['ArrowLeft', 'ArrowRight'].includes(event.key) && input.selectionStart === 0) {
+                const previousInput = inputFields[index - 1];
+                if (previousInput) {
+                    previousInput.focus();
+                }
+            }
+        });
     });
 
-    input.addEventListener('keydown', (event) => {
-        if (event.key === 'Backspace' && input.value === '') {
-            const previousInput = inputFields[index - 1];
-            if (previousInput) {
-                previousInput.focus();
-            }
-        }
-
-        if (['ArrowLeft', 'ArrowRight'].includes(event.key) && input.selectionStart === 0) {
-            const previousInput = inputFields[index - 1];
-            if (previousInput) {
-                previousInput.focus();
-            }
-        }
-    });
-});
-
+}
 
 
 checkGuessButton.addEventListener('click', checkGuess)
